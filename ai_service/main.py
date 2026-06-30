@@ -8,7 +8,7 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 from ai_service.config import get_settings
-from ai_service.routers import advisory, pitch
+from ai_service.routers import advisory, pitch, chat, legal
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -34,9 +34,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Routers — chat, legal, mentorship, investor_panel are added in later phases.
+# Routers — mentorship, investor_panel are added in Phase 10.
 app.include_router(advisory.router)
 app.include_router(pitch.router)
+app.include_router(chat.router)
+app.include_router(legal.router)
 
 
 @app.get("/health", tags=["health"])
