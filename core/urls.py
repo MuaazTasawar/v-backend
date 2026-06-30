@@ -7,6 +7,7 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
     SpectacularRedocView,
 )
+from webhooks.docusign_webhook import docusign_webhook
 
 urlpatterns = [
     # Admin
@@ -21,6 +22,9 @@ urlpatterns = [
     path("api/v1/financials/", include("apps.financials.urls")),
     path("api/v1/marketplace/", include("apps.marketplace.urls")),
     path("api/v1/notifications/", include("apps.notifications.urls")),
+
+    # Webhooks
+    path("api/v1/webhooks/docusign/", docusign_webhook, name="docusign-webhook"),
 
     # Social auth
     path("social/", include("social_django.urls", namespace="social")),
